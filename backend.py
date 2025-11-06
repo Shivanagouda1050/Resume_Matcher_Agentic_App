@@ -82,13 +82,17 @@ def ensure_not_empty(data: dict, required_fields: list) -> dict:
             data[key] = "Not specified"
     return data
 
-skills_df = pd.read_csv(r"C:\Users\703437454\Downloads\Master_Skill_Subskill.csv")
+current_dir = os.path.dirname(__file__)
+csv_path = os.path.join(current_dir, "Master_Skill_Subskill.csv")
+
+skills_df = pd.read_csv(csv_path)
+
 internal_skills_dict = {}
 for _, row in skills_df.iterrows():
     main_skill = str(row["Main_Skill"]).strip()
     sub_skills = [s.strip() for s in str(row["Sub_Skills"]).split(",") if s.strip()]
     internal_skills_dict[main_skill] = sub_skills
-
+    
 # =====================================================
 # ✅ STATE
 # =====================================================
